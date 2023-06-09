@@ -36,9 +36,11 @@ time = 0
 while cnt_cheese > 0:
     pre_cnt_cheese = cnt_cheese
     time += 1
+
     copy_matrix = []
     for i in range(N):
         copy_matrix.append(matrix[i][:])
+    
     outside_bfs((0, 0))
     for i in range(N):
         for j in range(M):
