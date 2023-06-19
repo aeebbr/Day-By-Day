@@ -1,7 +1,7 @@
 // [BOJ] 21609. 상어 중학교
 // 풀이 시간: 102 분
 // 실행 시간: 200 ms
-// 메모리: 	26588 KB
+// 메모리: 26588 KB
 
 import java.io.*;
 import java.util.*;
