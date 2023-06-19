@@ -1,28 +1,18 @@
 // [BOJ] 21609. 상어 중학교
-// 풀이 시간: 00 분
-// 실행 시간: 0 ms
-// 메모리: 0 KB
+// 풀이 시간: 102 분
+// 실행 시간: 200 ms
+// 메모리: 	26588 KB
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Main {
 
-    // 왼 아 오 위
     public static int[][] dt = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     public static void main(String[] args) throws IOException {
-        // | r1 - r2| + | c1 - c2 | = 1
-        // 사방탐색 -> 인접
-
-        // 무지개 0
-        // 검은색 -1
-
-        // 가장 큰 그룹 찾기
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
@@ -30,7 +20,6 @@ public class Main {
 
         int[][] map = new int[N][N];
         ArrayList<Cood> targets = new ArrayList<>();
-        ArrayList<Cood> remove = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -58,7 +47,7 @@ public class Main {
                     ArrayList<Cood> group = new ArrayList<>();
 
                     int maxI = first.i;
-                    int maxJ = first.j;
+                    int minJ = first.j;
                     int coodSum = 1;
                     int coodRainbow = 0;
 
@@ -67,13 +56,9 @@ public class Main {
                     q.offer(first);
                     group.add(first);
 
-                    System.out.println(first.i);
-                    System.out.println(first.j);
-
                     visit[first.i][first.j] = true;
 
                     while (!q.isEmpty()) {
-                        System.out.println("********start**********");
                         Cood temp = q.poll();
 
                         for (int j = 0; j < 4; j++) {
@@ -81,7 +66,6 @@ public class Main {
                             int dj = temp.j + dt[j][1];
 
                             if (di >= 0 && dj >= 0 && di < N && dj < N && (map[di][dj] == 0 || map[di][dj] == map[first.i][first.j]) && !visit[di][dj]) {
-                                System.out.println("map = " + map[di][dj]);
                                 visit[di][dj] = true;
                                 q.offer(new Cood(di, dj));
 
@@ -89,12 +73,8 @@ public class Main {
                                     coodRainbow++;
                                 }
                                 else {
-                                    System.out.println("di = " + di);
-                                    System.out.println("dj = " + dj);
-                                    System.out.println("maxJ = " + maxJ);
-
-                                    if (di > maxI) maxI = di;
-                                    if (dj > maxJ) maxJ = dj;
+                                    if (di < maxI) maxI = di;
+                                    if (dj < minJ) minJ = dj;
                                 }
                                 coodSum++;
                                 group.add(new Cood(di, dj));
@@ -102,32 +82,23 @@ public class Main {
                             }
                         }
                     }
-                    System.out.println("maxJ = " + maxJ);
 
                     if (group.size() > 1) {
-                        coods.add(new Coods(maxI, maxJ, coodRainbow, coodSum, group));
+                        coods.add(new Coods(maxI, minJ, coodRainbow, coodSum, group));
                     }
                 }
             }
 
             if (coods.size() > 0) {
 
-                System.out.println("coods size === "+coods.size());
-
                 Collections.sort(coods);
-
-                System.out.println(coods.size());
-                System.out.println(coods.get(0).sum);
                 Coods choose = coods.get(0);
-                System.out.println("=== size ? " + targets.size());
 
                 sum += (coods.get(0).sum * coods.get(0).sum);
-                System.out.println("sum = " + sum);
-
+                
                 for (int j = 0; j < choose.sum; j++) {
 
                     Cood cood = choose.group.get(j);
-                    System.out.println("i === " + cood.i + " ,  j === " + cood.j);
                     map[cood.i][cood.j] = -2;
                 }
 
@@ -135,25 +106,11 @@ public class Main {
                 down(map, N, false, targets);
                 rotate(map, N);
                 down(map, N, true, targets);
-//                start = start + coods.get(0).sum - 1;
             } else {
                 break;
             }
-
-
-            for (int i = 0; i < N; i++) {
-                System.out.println(Arrays.toString(map[i]));
-            }
-
-            System.out.println("**********************");
-            System.out.println("왜 시작 안해주냐고오오오옹");
-            System.out.println(size);
-//            System.out.println(start);
-            System.out.println(targets.size());
-
-
         }
-
+        System.out.println(sum);
     }
 
     public static void rotate(int[][] map, int N) {
@@ -165,7 +122,7 @@ public class Main {
             }
         }
         for(int i = 0; i < N; ++i) {
-            System.arraycopy(tmp[i],0,map[i],0,N);
+            System.arraycopy(tmp[i], 0, map[i], 0, N);
         }
     }
 
@@ -190,18 +147,7 @@ public class Main {
                 }
             }
         }
-
-        System.out.println("down ===========");
-        for (int i = 0; i < N; i++) {
-            System.out.println(Arrays.toString(map[i]));
-        }
-        System.out.println("down end ===========");
-
-
-
-
     }
-
 
     private static class Cood {
         int i, j;
@@ -243,8 +189,8 @@ public class Main {
                     if (this.i - o.i < 0) return 1;
                     else if (this.i - o.i > 0) return -1;
                     else {
-                        if (this.j - o.j > 0) return 1;
-                        else if (this.j - o.j < 0) return -1;
+                        if (this.j - o.j < 0) return 1;
+                        else if (this.j - o.j > 0) return -1;
                         return 0;
                     }
                 }
