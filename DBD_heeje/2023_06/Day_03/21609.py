@@ -1,5 +1,7 @@
 # [BOJ] 21609. 상어 중학교
 # 소요 시간 : 90분
+# 실행 시간: 96 ms
+# 메모리: 34364 KB
 
 import sys
 from collections import deque
