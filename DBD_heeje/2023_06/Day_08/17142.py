@@ -3,14 +3,15 @@
 # 실행 시간: 248 ms(PyPy3)
 # 메모리: 117416 KB
 
-def bfs(virus_case, blank, min_time):
+def bfs(virus_case, blank):
+    global min_time
     queue = deque(virus_case)
 
     while queue:
         y, x = queue.popleft()
 
-        if copied_matrix[y][x] - 3 >= min_time:
-            return min_time
+        if min_time != -1 and copied_matrix[y][x] - 3 >= min_time:
+            return
 
         for d in range(4):
             move_y, move_x = y + dy[d], x + dx[d]
@@ -19,11 +20,16 @@ def bfs(virus_case, blank, min_time):
                 if copied_matrix[move_y][move_x] == 0:
                     blank -= 1
                     if blank == 0:
-                        return copied_matrix[y][x] - 2
+                        time = copied_matrix[y][x] - 2
+                        if min_time == -1:
+                            min_time = time
+                        else:
+                            min_time = min(min_time, time)
+                        return
                     
                 copied_matrix[move_y][move_x] = copied_matrix[y][x] + 1
 
-    return -1
+    return
 
 
 import sys
@@ -38,7 +44,7 @@ N, M = map(int, input().split())
 matrix = []
 virus_list = []
 blank = N ** 2
-min_time = float("inf")
+min_time = -1
 for i in range(N):
     row = list(map(int, input().split()))
     for j in range(N):
@@ -66,7 +72,6 @@ else:
         for y, x in virus_case:
             copied_matrix[y][x] = 3
 
-        time = bfs(virus_case, blank, min_time)
-        min_time = min_time if time == -1 else min(min_time, time)
+        bfs(virus_case, blank)
 
-    print(min_time if min_time < float("inf") else -1)
+    print(min_time)
