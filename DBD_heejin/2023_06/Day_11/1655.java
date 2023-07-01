@@ -18,7 +18,5 @@ public class Main {
 
         for (int i = 1; i < 20; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 1; j < 20; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
-            }
+            
         }
