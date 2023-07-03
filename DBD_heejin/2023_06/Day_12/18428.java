@@ -62,7 +62,6 @@ public class avoid_cctv_18428 {
     public static void comb(int[] arr, boolean[] visit, int idx, int depth, int r) {
 
         if (r == depth) {
-            // 바이러스 퍼뜨리기
             bfs(arr, visit);
             return;
         }
