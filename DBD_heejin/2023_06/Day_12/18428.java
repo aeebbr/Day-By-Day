@@ -86,5 +86,4 @@ public class avoid_cctv_18428 {
             }
         }
     }
-
 }
