@@ -80,7 +80,7 @@ public class avoid_cctv_18428 {
         int[][] tmp = new int[N][N];
 
         for (int i = 0; i < N; i++) {
-//            System.arraycopy(tmp[i], 0, map[i], 0, N);
+//            System.arraycopy(map[i], 0, tmp[i], 0, N);
             for (int j = 0; j < N; j++) {
                 tmp[i][j] = map[i][j];
             }
