@@ -56,7 +56,6 @@ public class avoid_cctv_18428 {
         boolean[] visit = new boolean[arr.length];
         comb(arr, visit, 0, 0, 3);
         System.out.println(answer == Integer.MAX_VALUE ? -1 : answer);
-
     }
 
     public static void comb(int[] arr, boolean[] visit, int idx, int depth, int r) {
