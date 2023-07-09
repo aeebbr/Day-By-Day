@@ -8,7 +8,6 @@ import java.util.*;
 
 public class avoid_cctv_18428 {
 
-
     public static class Point {
         int i, j;
 
