@@ -47,6 +47,7 @@ public class avoid_cctv_18428 {
             System.out.println(Arrays.toString(map[i]));
         }
 
+        // 조합을 위한 배열 생성
         int[] arr = new int[empties.size()];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = i;
