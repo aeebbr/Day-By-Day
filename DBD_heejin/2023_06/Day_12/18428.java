@@ -38,7 +38,7 @@ public class avoid_cctv_18428 {
             for (int j = 0; j < N; j++) {
                 map[i][j] = temp.charAt(j);
                 if (map[i][j] == 'X') {
-                    empties.add(new Point(i, j));
+//                    empties.add(new Point(i, j));
                 }
             }
         }
