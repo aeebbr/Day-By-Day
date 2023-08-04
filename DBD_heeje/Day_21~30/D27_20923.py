@@ -1,7 +1,7 @@
 # [BOJ] 20923. 숫자 할리갈리 게임
-# 풀이 시간: 00 분
-# 실행 시간: 00 ms
-# 메모리: 00 KB
+# 풀이 시간: 90 분
+# 실행 시간: 632 ms
+# 메모리: 142692 KB
 
 import sys
 from collections import deque
