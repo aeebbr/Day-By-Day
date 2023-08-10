@@ -15,7 +15,6 @@
 import sys 
 
 input = sys.stdin.readline
-?????????????
 sys.setrecursionlimit(10 ** 5)
 
 # cur: 현재 탐색하는 노드 
