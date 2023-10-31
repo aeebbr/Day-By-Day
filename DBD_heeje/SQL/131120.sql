@@ -1,4 +1,4 @@
-/* [Programmers] 151136. 평균 일일 대여 요금 구하기 */
+/* [Programmers] 131120. 3월에 태어난 여성 회원 목록 출력하기 */
 
 SELECT MEMBER_ID, MEMBER_NAME, GENDER, DATE_FORMAT(DATE_OF_BIRTH, "%Y-%m-%d") as DATE_OF_BIRTH
 FROM MEMBER_PROFILE
