@@ -1,6 +1,38 @@
 import sys
 sys.stdin = open("input_1210.txt", "r")
 
+# 우선 순위대로 방향 정렬
+# 좌 우 상
+    # 좌/우와 상을 동시에 만난 상황이라면 좌/우가 우선되어야 함 
+    # 좌와 우를 동시에 만나는 상황은 없으니 좌/우 간 순위는 상관 없음 
+dr = [0, 0, -1]
+dc = [-1, 1, 0]
+
+for _ in range(10):
+    test_num = int(input())
+    arr = [list(map(int, input().split())) for _ in range(100)]
+    cr, cc = 99, 0
+    cc = arr[99].index(2)
+
+    # 사다리 타기 시작 
+    while cr != 0:
+        # 방향 이동
+        for dir in range(3):
+            nr = cr + dr[dir]
+            nc = cc + dc[dir]
+
+            # 이동 조건
+            # 범위 내일 것, 이동 지점의 값이 1일 것 
+            if 0 <= nr < 100 and 0 <= nc < 100 and arr[nr][nc] == 1:
+                cr, cc = nr, nc
+                # 방문 처리 
+                arr[cr][cc] = 3
+            
+    print(f"#{test_num} {cc}")
+            
+'''
+# 최적화 전 코드 
+
 # 우 좌 상
 dr = [0, 0, -1]
 dc = [1, -1, 0]
@@ -49,3 +81,4 @@ for _ in range(10):
         if cr == 0:
             print(f"#{test_num} {cc}")
             break
+'''
